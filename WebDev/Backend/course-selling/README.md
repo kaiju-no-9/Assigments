@@ -108,4 +108,12 @@ This video demonstrates the test cases being executed for the Course Selling app
 ---
 
 This project was created using `bun init` with **Bun v1.2.x**.
-[Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+[Bun](https://bun.sh) is a fast all-in-one Ja<img width="1074" height="351" alt="Screenshot 2026-02-24 at 12 18 54 PM" src="https://github.com/user-attachments/assets/f4be26c3-548d-466b-933f-ccfca1efd0e3" />
+vaScript runtime.
+
+
+solved...........
+
+<img width="1074" height="351" alt="Screenshot 2026-02-24 at 12 18 54 PM" src="https://github.com/user-attachments/assets/95a0d499-aa6d-4881-937a-ebec5ae9aeba" />
+
+
