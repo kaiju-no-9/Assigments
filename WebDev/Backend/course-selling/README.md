@@ -109,5 +109,3 @@ This video demonstrates the test cases being executed for the Course Selling app
 
 This project was created using `bun init` with **Bun v1.2.x**.
 [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
-
-
