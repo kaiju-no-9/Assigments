@@ -7,9 +7,19 @@
 // When the Promise resolves, the callback should be called with `(null, data)`.
 // When the Promise rejects, the callback should be called with the error.
 
-
+// calling function as arry and return the element form the end 
 function callbackify(fn) {
+  return function(...arg){
+    // returing the last element 
+    const callback = arg.pop();
+   fn(...arg).then(data=>{
+    callback(null , data)
+   }).catch(error=>{
+    callback(error)
+   })
 
+  
+  }
 }
 
 module.exports = callbackify;
