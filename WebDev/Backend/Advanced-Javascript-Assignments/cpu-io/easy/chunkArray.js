@@ -13,6 +13,20 @@
 //
 // This is a prerequisite for common patterns like batching API calls.
 
-function chunkArray(array, size) {}
+function chunkArray(array, size) {
+
+    if( !array ||  array.lenght===0 || size<=0){
+        return [];
+    }
+     const chuncked = []
+     let index = 0 ;
+     while(index< array.length){
+        const chuck = array.slice( index , index+size);
+        chuncked.push(chuck);
+         index+= size
+     }
+     return chuncked;
+
+}
 
 module.exports = chunkArray;
