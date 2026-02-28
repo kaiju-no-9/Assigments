@@ -10,8 +10,18 @@
 // // 1. Resolve with result if callback gets (null, result)
 // // 2. Reject if callback gets an error
 
-function promisify(fn) {
+//const { resolve } = require("bun");
 
+function promisify(fn) {
+    return function(...arg){
+        return new Promise((resolve, reject)=>{ 
+        fn(...arg , (error , res)=>{
+           if(error){
+             return  reject(error)
+           }resolve(res)
+    })
+})
+}
 }
 
 module.exports = promisify;

@@ -9,7 +9,12 @@
 // // 2. Reject with "Request Timed Out" if it takes longer than ms
 
 function withTimeoutPromise(promise, ms) {
-
+     const timer = new  Promise((resolve, reject)=>{
+          setTimeout(() => {
+               reject(new Error("Request Timed Out"));
+          },ms);
+     })
+     return Promise.race([promise , timer])
 }
 
 module.exports = withTimeoutPromise;
