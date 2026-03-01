@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// new things-- UUID(used for genaral id genration) 
+// CUID(used when a large when id are genrated by client raterthsn fontend) 
+//ULID (whenever id are genrated by server want to avoid B+ trees)
+//NanoID(use  for id genrstu=ion for example in casee of javascript)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  customer
+  owner
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.VarChar(255)
+  name      String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  phone     String?  @unique @db.VarChar(20)
+  role      Role     @default(customer)
+  created_at DateTime @default(now())
+  hotels    Hotel[]
+  bookings Booking[]
+  reviews Review[]
+}
+
+model Hotel {
+  id                 String           @id @default(uuid())
+  owner_id           String           @db.VarChar(255)
+  name               String           @db.VarChar(255)
+  description        String           @db.VarChar(255)
+  city               String           @db.VarChar(100)
+  country            String           @db.VarChar(100)
+  amenities          Json             @default("[]")
+  created_at         DateTime         @default(now())
+  // here @db.Decimal(2,1) means 2 digits in total and 1 digit after decimal
+  rating             Decimal          @default(0) @db.Decimal(2,1)
+  total_reviews      Int              @default(0)
+  owner              User             @relation(fields: [owner_id], references: [id] , onDelete: Cascade)
+  rooms Rooms[]
+  bookings Booking[]
+  reviews Review[]
+  
+}
+
+model Rooms {
+  id                 String           @id @default(uuid())
+  hotel_id           String           @db.VarChar(255)
+  hotel              Hotel            @relation(fields: [hotel_id], references: [id] , onDelete: Cascade)
+  room_number        String           @db.VarChar(50)
+  room_type          String           @db.VarChar(100)
+  price_per_night    Decimal          @db.Decimal(10,2)
+  max_occupancy      Int
+  created_at         DateTime         @default(now())
+  bookings Booking[]
+  @@unique([hotel_id, room_number])
+
+}
+enum BookingStatus{
+  confirmed
+  cancelled 
+}
+model Booking {
+  id                 String           @id @default(uuid())
+  user_id            String           @db.VarChar(255)
+  room_id            String           @db.VarChar(255)
+  hotel_id           String           @db.VarChar(255)
+  check_in_date      DateTime         @default(now())
+  check_out_date     DateTime         @default(now())
+  total_price        Decimal          @db.Decimal(10,2)
+  booking_date       DateTime         @default(now())
+  created_at         DateTime         @default(now())
+  status             BookingStatus    @default(confirmed)
+  cancelled_at       DateTime?        @default(now())
+  user User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  room Rooms          @relation(fields: [room_id], references: [id], onDelete: Cascade)
+  hotel Hotel         @relation(fields: [hotel_id], references: [id], onDelete: Cascade)
+  reviews Review[]
+}
+
+model Review{
+  id          String            @id @default(uuid())
+  hotel_id    String            @db.VarChar(255)
+  user_id     String            @db.VarChar(255) 
+  booking_id  String            @db.VarChar(255)
+  rating      Int 
+  comment     String            @db.VarChar(255)
+  created_at  DateTime          @default(now())
+  hotel       Hotel             @relation(fields: [hotel_id], references: [id], onDelete: Cascade)
+  user        User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  booking     Booking           @relation(fields: [booking_id], references: [id], onDelete: Cascade)
+  @@unique([ user_id ,booking_id])
+}

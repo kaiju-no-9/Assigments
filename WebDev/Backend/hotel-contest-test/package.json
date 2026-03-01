@@ -9,12 +9,24 @@
     "test:verbose": "vitest run --reporter=verbose"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bcrypt": "^6.0.0",
+    "@types/bun": "latest",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/pg": "^8.18.0",
+    "prisma": "^7.4.2"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "vitest": "^4.0.17"
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^7.4.2",
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.19.0",
+    "vitest": "^4.0.17",
+    "zod": "^4.3.6"
   }
 }
