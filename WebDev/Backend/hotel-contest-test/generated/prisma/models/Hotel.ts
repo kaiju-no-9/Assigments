@@ -213,7 +213,7 @@ export type HotelGroupByOutputType = {
   id: string
   owner_id: string
   name: string
-  description: string
+  description: string | null
   city: string
   country: string
   amenities: runtime.JsonValue
@@ -249,7 +249,7 @@ export type HotelWhereInput = {
   id?: Prisma.StringFilter<"Hotel"> | string
   owner_id?: Prisma.StringFilter<"Hotel"> | string
   name?: Prisma.StringFilter<"Hotel"> | string
-  description?: Prisma.StringFilter<"Hotel"> | string
+  description?: Prisma.StringNullableFilter<"Hotel"> | string | null
   city?: Prisma.StringFilter<"Hotel"> | string
   country?: Prisma.StringFilter<"Hotel"> | string
   amenities?: Prisma.JsonFilter<"Hotel">
@@ -266,7 +266,7 @@ export type HotelOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   owner_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
@@ -286,7 +286,7 @@ export type HotelWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.HotelWhereInput | Prisma.HotelWhereInput[]
   owner_id?: Prisma.StringFilter<"Hotel"> | string
   name?: Prisma.StringFilter<"Hotel"> | string
-  description?: Prisma.StringFilter<"Hotel"> | string
+  description?: Prisma.StringNullableFilter<"Hotel"> | string | null
   city?: Prisma.StringFilter<"Hotel"> | string
   country?: Prisma.StringFilter<"Hotel"> | string
   amenities?: Prisma.JsonFilter<"Hotel">
@@ -303,7 +303,7 @@ export type HotelOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   owner_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   city?: Prisma.SortOrder
   country?: Prisma.SortOrder
   amenities?: Prisma.SortOrder
@@ -324,7 +324,7 @@ export type HotelScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
   owner_id?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
   name?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Hotel"> | string | null
   city?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
   country?: Prisma.StringWithAggregatesFilter<"Hotel"> | string
   amenities?: Prisma.JsonWithAggregatesFilter<"Hotel">
@@ -336,7 +336,7 @@ export type HotelScalarWhereWithAggregatesInput = {
 export type HotelCreateInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -353,7 +353,7 @@ export type HotelUncheckedCreateInput = {
   id?: string
   owner_id: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -368,7 +368,7 @@ export type HotelUncheckedCreateInput = {
 export type HotelUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -385,7 +385,7 @@ export type HotelUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   owner_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -401,7 +401,7 @@ export type HotelCreateManyInput = {
   id?: string
   owner_id: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -413,7 +413,7 @@ export type HotelCreateManyInput = {
 export type HotelUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -426,7 +426,7 @@ export type HotelUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   owner_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -600,7 +600,7 @@ export type HotelUpdateOneRequiredWithoutReviewsNestedInput = {
 export type HotelCreateWithoutOwnerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -615,7 +615,7 @@ export type HotelCreateWithoutOwnerInput = {
 export type HotelUncheckedCreateWithoutOwnerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -660,7 +660,7 @@ export type HotelScalarWhereInput = {
   id?: Prisma.StringFilter<"Hotel"> | string
   owner_id?: Prisma.StringFilter<"Hotel"> | string
   name?: Prisma.StringFilter<"Hotel"> | string
-  description?: Prisma.StringFilter<"Hotel"> | string
+  description?: Prisma.StringNullableFilter<"Hotel"> | string | null
   city?: Prisma.StringFilter<"Hotel"> | string
   country?: Prisma.StringFilter<"Hotel"> | string
   amenities?: Prisma.JsonFilter<"Hotel">
@@ -672,7 +672,7 @@ export type HotelScalarWhereInput = {
 export type HotelCreateWithoutRoomsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -688,7 +688,7 @@ export type HotelUncheckedCreateWithoutRoomsInput = {
   id?: string
   owner_id: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -718,7 +718,7 @@ export type HotelUpdateToOneWithWhereWithoutRoomsInput = {
 export type HotelUpdateWithoutRoomsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -734,7 +734,7 @@ export type HotelUncheckedUpdateWithoutRoomsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   owner_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -748,7 +748,7 @@ export type HotelUncheckedUpdateWithoutRoomsInput = {
 export type HotelCreateWithoutBookingsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -764,7 +764,7 @@ export type HotelUncheckedCreateWithoutBookingsInput = {
   id?: string
   owner_id: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -794,7 +794,7 @@ export type HotelUpdateToOneWithWhereWithoutBookingsInput = {
 export type HotelUpdateWithoutBookingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -810,7 +810,7 @@ export type HotelUncheckedUpdateWithoutBookingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   owner_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -824,7 +824,7 @@ export type HotelUncheckedUpdateWithoutBookingsInput = {
 export type HotelCreateWithoutReviewsInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -840,7 +840,7 @@ export type HotelUncheckedCreateWithoutReviewsInput = {
   id?: string
   owner_id: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -870,7 +870,7 @@ export type HotelUpdateToOneWithWhereWithoutReviewsInput = {
 export type HotelUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -886,7 +886,7 @@ export type HotelUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   owner_id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -900,7 +900,7 @@ export type HotelUncheckedUpdateWithoutReviewsInput = {
 export type HotelCreateManyOwnerInput = {
   id?: string
   name: string
-  description: string
+  description?: string | null
   city: string
   country: string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -912,7 +912,7 @@ export type HotelCreateManyOwnerInput = {
 export type HotelUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -927,7 +927,7 @@ export type HotelUpdateWithoutOwnerInput = {
 export type HotelUncheckedUpdateWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -942,7 +942,7 @@ export type HotelUncheckedUpdateWithoutOwnerInput = {
 export type HotelUncheckedUpdateManyWithoutOwnerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   city?: Prisma.StringFieldUpdateOperationsInput | string
   country?: Prisma.StringFieldUpdateOperationsInput | string
   amenities?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1086,7 +1086,7 @@ export type $HotelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     owner_id: string
     name: string
-    description: string
+    description: string | null
     city: string
     country: string
     amenities: runtime.JsonValue
