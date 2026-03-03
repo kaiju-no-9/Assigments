@@ -80,6 +80,7 @@ model Booking {
   check_in_date      DateTime         @default(now())
   check_out_date     DateTime         @default(now())
   total_price        Decimal          @db.Decimal(10,2)
+  guests             Int
   booking_date       DateTime         @default(now())
   created_at         DateTime         @default(now())
   status             BookingStatus    @default(confirmed)

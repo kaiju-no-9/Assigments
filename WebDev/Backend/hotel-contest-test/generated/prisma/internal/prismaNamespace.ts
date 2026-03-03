@@ -867,6 +867,7 @@ export const BookingScalarFieldEnum = {
   check_in_date: 'check_in_date',
   check_out_date: 'check_out_date',
   total_price: 'total_price',
+  guests: 'guests',
   booking_date: 'booking_date',
   created_at: 'created_at',
   status: 'status',
