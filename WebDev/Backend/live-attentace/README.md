@@ -107,3 +107,24 @@ Tests verify that your server follows the exact response format specified:
 - WebSocket tests may timeout if your server is slow - increase timeout in `vitest.config.js` if needed
 - The test suite assumes only ONE active attendance session at a time (as per spec)
 
+Docker-Cammand
+<bash>
+docker run --name my-mongo -d -p 27017:27017 mongo
+</bash>
+// should do 
+validation 
+<bash>
+docker run --name my-mongodb \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=secretpassword \
+  -d -p 27017:27017 mongo
+
+</bash>
+adding volume for case of delition (not needed every time)
+<bash>
+docker run --name my-mongodb -v /my/local/data:/data/db -d -p 27017:27017 mongo
+</bash>
+acessesing DataBases
+<bash>
+docker exec -it my-mongodb mongosh
+</bash>
