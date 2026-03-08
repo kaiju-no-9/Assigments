@@ -1,39 +1,25 @@
-import { Schema } from "mongoose";
-import {z} from zod;
+import { z } from "zod";
 
-const SignSchema = z.oboject({
-    nmae: z.string(),
-    email: z.email(),
-    password:z.string().min(6),
-    role: z.enum(["teacher" , "student"])
-})
+export const SignSchema = z.object({
+    name: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6),
+    role: z.enum(["teacher", "student"]),
+});
 
-const LoginSchema = z.object({
-    email: z.email(),
-    password:z.string().min(6)
-})
-const ClassSchema = z.object({
-    classId:z.String()
-})
-const AddStudent = z.object({
-    studentId:z.String()
-})
+export const LoginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6),
+});
 
-const Validation=(schema)=>((req, res ,next)=>{
-    const result = schema.safeParse(req.body);
-    if(!result.success){
-        res.status(400).json({
-           "success": false,
-           "error": "Invalid request schema", 
-        })
-    }
-    next();
-})
+export const ClassSchema = z.object({
+    className: z.string(),
+});
 
-module.exports = {
-    SignSchema, 
-    LoginSchema,
-    Validation,
-    AddStudent,
-    ClassSchema,
-}
+export const AddStudentSchema = z.object({
+    studentId: z.string(),
+});
+
+export const ClassIdSchema = z.object({
+    classId: z.string(),
+});

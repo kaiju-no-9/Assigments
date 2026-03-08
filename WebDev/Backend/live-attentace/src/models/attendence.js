@@ -1,23 +1,25 @@
-import mongoose from "mongoose"
-import { Schema } from "mongoose"
+import mongoose from "mongoose";
 
-
-const  attendenceschema = new Schema({
-    classId:{
-       type :mongoose.Schema.Types.ObjectId,
-       required:true,
-       ref:"Class"
-       
-    },
-    studentId:{
+const attendanceSchema = new mongoose.Schema({
+    classId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        required: true,
+        ref: "Class",
     },
-    status:{
-        type:String,
-        enum: ["present" , "absent"],
-        required:true
-    }
+    studentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+    },
+    status: {
+        type: String,
+        enum: ["present", "absent"],
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+});
 
-})
-expoet.models = moongoose.model("Attendence" , attendenceschema)
+export default mongoose.model("Attendance", attendanceSchema);
