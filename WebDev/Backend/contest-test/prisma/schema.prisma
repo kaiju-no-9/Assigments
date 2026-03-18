@@ -1,0 +1,105 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  creator
+  contestee
+}
+
+model Users {
+  id String                    @id       @default(uuid())
+  name String
+  email String                 @unique
+  password String
+  role Role                   @default(contestee)
+  contests Contests[]
+  mcq_submissions McqSubmissions[]
+  dsa_submissions DsaSubmissions[]
+  
+}
+
+model Contests {
+  id String                         @id             @default(uuid())
+  title String
+  description String
+  start_time DateTime              @default(now())
+  end_time DateTime  
+  created_at DateTime              @default(now())
+  
+  creator_id String
+  creator Users        @relation(fields: [creator_id], references: [id])
+  mcq_questions McqQuestions[]
+  dsa_questions DsaQuestions[]
+}
+
+
+model McqQuestions {
+  id String                      @id          @default(uuid())
+  question_text String
+  points Int                     @default(1)
+  options Json?
+  correct_option_index Int
+  created_at DateTime            @default(now())       
+  contest_id String
+  contest Contests               @relation(fields: [contest_id], references: [id], onDelete: Cascade)
+  mcq_submissions McqSubmissions[]
+}
+
+model DsaQuestions {
+  id String                       @id          @default(uuid())
+  title String
+  description String
+  tags Json?
+  points Int                        @default(100)  
+  time_limit Int                    @default(2000) 
+  memory_limit Int                  @default(256)    
+  contest_id String
+  contest Contests                  @relation(fields: [contest_id], references: [id], onDelete: Cascade)
+  test_cases TestCases[]
+  dsa_submissions DsaSubmissions[]
+}
+
+model TestCases{
+    id String                     @id           @default(uuid())
+    input String
+    expected_output String
+    is_hidden  Boolean                         @default(false)
+    created_at DateTime                        @default(now())         
+    dsa_question_id String
+    dsa_question DsaQuestions                  @relation(fields: [dsa_question_id], references: [id] ,onDelete: Cascade)
+}
+
+model McqSubmissions{
+  id  String                   @id            @default(uuid())
+  user_id String
+  user Users                                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  question_id String
+  question McqQuestions                      @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  submitted_answer Int
+  is_correct Boolean
+  points Int
+  created_at DateTime                       @default(now())
+}
+
+model DsaSubmissions{
+    id String               @id             @default(uuid())
+    user_id String
+    user Users                              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    problem_id String
+    problem DsaQuestions                    @relation(fields: [problem_id], references: [id], onDelete: Cascade)
+    code String
+    language String
+    status String
+    points_earned Int                      @default(0)
+    test_cases_passed Int                  @default(0)
+    total_test_cases Int                   @default(0)
+    execution_time Int
+    submitted_at DateTime                 @default(now())
+}
